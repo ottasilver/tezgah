@@ -159,7 +159,7 @@ Google Core Web Vitals artık sıralama faktörü. Hedefler:
 Performans araçları:
 - Lighthouse (Chrome DevTools'ta dahili)
 - PageSpeed Insights (https://pagespeed.web.dev)
-- Vercel Analytics (Web Vitals otomatik ölçüm)
+- PostHog veya Plausible (Web Vitals ölçümü)
 
 ### Launch Öncesi SEO Kontrol Listesi
 

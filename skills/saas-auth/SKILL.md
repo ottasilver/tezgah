@@ -78,7 +78,7 @@ Aynı e-posta ile hem Google hem Magic Link kullanılabilmesi için hesap bağla
 
 **JWT (JSON Web Token) — Varsayılan önerimiz:**
 - Oturum bilgisi token içinde taşınır, her istekte veritabanı sorgusu yapmaz
-- Serverless ortamlarda (Vercel) çok daha performanslı
+- Serverless ve container ortamlarında performanslı
 - Token içine plan bilgisi gibi özel alanlar eklenebilir
 - Dezavantaj: token iptal etmek anında mümkün değil (token süresi dolana kadar geçerli)
 

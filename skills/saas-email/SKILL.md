@@ -29,7 +29,7 @@ Bu skill, bir SaaS uygulamasının e-posta katmanını kurar. E-posta, kullanıc
 
 **Ne zaman seç:** Çoğu SaaS projesi için. Modern API, React Email ile güzel şablonlar, Next.js ekosistemiyle doğal uyum.
 
-Güçlü yönleri: API tasarımı basit ve modern, React Email ile tip güvenli şablonlar, webhook desteği, domain doğrulama dashboard'u anlaşılır, Next.js ve Vercel ile sorunsuz entegrasyon.
+Güçlü yönleri: API tasarımı basit ve modern, React Email ile tip güvenli şablonlar, webhook desteği, domain doğrulama dashboard'u anlaşılır, Next.js ile sorunsuz entegrasyon.
 
 Zayıf yönleri: Ücretsiz katman günde 100 e-posta ile sınırlı (launch günü aşılabilir), inbound e-posta desteği sınırlı, görece yeni servis (Mailgun kadar olgun değil).
 
@@ -88,7 +88,7 @@ Başlangıç değeri: `v=DMARC1; p=none; rua=mailto:dmarc@uygulamam.com`
 
 ### DNS Kayıt Ekleme Süreci
 
-1. Domain sağlayıcının (Cloudflare, Namecheap, GoDaddy, Vercel Domains vb.) DNS yönetim paneline git
+1. Domain sağlayıcının (Cloudflare, Namecheap, GoDaddy vb.) DNS yönetim paneline git
 2. E-posta servisinin dashboard'undan gerekli kayıtları al (SPF, DKIM, DMARC)
 3. Kayıtları DNS paneline ekle — kayıt türü, isim ve değer alanlarını aynen kopyala
 4. Kaydet ve yayılmayı bekle (15 dakika - 48 saat)

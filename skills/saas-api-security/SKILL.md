@@ -60,7 +60,7 @@ Rate limit'i iki seviyede uygula:
 
 ### Serverless Ortamda Rate Limiting
 
-Serverless ortamlarda (Vercel, Netlify) her istek ayrı bir process'te çalışır. Bu yüzden in-memory rate limiting (bellekte sayaç tutma) çalışmaz — her process kendi belleğine sahiptir, sayaçlar paylaşılmaz.
+Serverless ortamlarda (Netlify, AWS Lambda vb.) her istek ayrı bir process'te çalışır. Bu yüzden in-memory rate limiting (bellekte sayaç tutma) çalışmaz — her process kendi belleğine sahiptir, sayaçlar paylaşılmaz. Dokploy gibi container tabanlı platformlarda tek process çalıştığı için in-memory rate limiting teknik olarak mümkün olsa da, uygulama yeniden başlatıldığında sayaçlar sıfırlanır.
 
 Çözüm: Dış bir veri deposu kullan. Upstash Redis serverless ortamlar için optimize edilmiş managed Redis servisidir. HTTP üzerinden çalışır (TCP bağlantısı gerektirmez), her istekte sayacı Redis'te tutar. Ücretsiz katmanı çoğu erken SaaS için yeterlidir.
 
@@ -187,7 +187,7 @@ Bu denge:
 
 ### Loglama
 
-Production'da console.log yeterli değildir. Bir loglama servisi kullan (Sentry, LogSnag, Axiom, Vercel Log Drain). Her 500 hatasında:
+Production'da console.log yeterli değildir. Bir loglama servisi kullan (Sentry, LogSnag, Axiom, Dokploy dahili logları). Her 500 hatasında:
 - Hata mesajı ve stack trace
 - İstek URL'si, metodu, body'si
 - Kullanıcı ID'si (varsa)
@@ -247,7 +247,7 @@ Yanıt: status (ok/degraded), timestamp, uptime. Veritabanı bağlantısı yoksa
 ## Gotchas
 
 - **Rate limit serverless'ta in-memory çalışmaz.** Her function invocation ayrı process. Upstash Redis veya benzeri dış çözüm gerekir.
-- **IP tespiti proxy arkasında.** Vercel veya Cloudflare arkasında gerçek client IP `x-forwarded-for` header'ındadır. Doğrudan `req.ip` güvenilir olmayabilir.
+- **IP tespiti proxy arkasında.** Dokploy (Traefik reverse proxy) veya Cloudflare arkasında gerçek client IP `x-forwarded-for` header'ındadır. Doğrudan `req.ip` güvenilir olmayabilir.
 - **Plan kontrolü UI'da yeterli değil.** Client-side plan kontrolü UX içindir (butonu kilitle, mesaj göster). Asıl kontrol server-side'da olmalı — client-side kontrol kolayca bypass edilir.
 - **Validation sadece API'de değil.** Client tarafında da validation yap (UX için — hızlı geri bildirim), ama güvenlik için server-side validation zorunlu. Client-side validation bypass edilebilir.
 - **500 hatasında detay verme.** "Internal server error: MongoDB connection timeout at line 42" gibi mesajlar saldırgana veritabanı türünü ve yapısını ifşa eder. Kullanıcıya "Bir şeyler yanlış gitti" de, detayı logla.

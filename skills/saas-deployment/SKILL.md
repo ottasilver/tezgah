@@ -1,12 +1,12 @@
 ---
 name: saas-deployment
 description: >
-  SaaS uygulamasını production'a taşı. Vercel, Railway veya Fly.io ile
+  SaaS uygulamasını production'a taşı. Dokploy, Railway veya Fly.io ile
   deployment, domain yapılandırması, SSL, ortam değişkenleri, CI/CD,
   izleme ve operasyonel hazırlık. Bu skill'i kullanıcı deploy, yayınlama,
   production, hosting, domain, SSL, CI/CD, monitoring veya "siteyi canlıya
   al" ile ilgili bir şey istediğinde kullan. "Deploy et", "yayınla",
-  "canlıya al", "Vercel'e koy", "domain bağla" gibi ifadeler tetikler.
+  "canlıya al", "Dokploy'a koy", "domain bağla" gibi ifadeler tetikler.
 ---
 
 # SaaS Deployment — Production'a Taşıma ve Operasyon
@@ -26,15 +26,15 @@ Bu skill, bir SaaS uygulamasını development ortamından production'a taşır v
 
 ## Hosting Platformu Seçimi
 
-### Vercel — Varsayılan Önerimiz
+### Dokploy — Varsayılan Önerimiz
 
-**Ne zaman seç:** Next.js kullanan hemen hemen her proje için.
+**Ne zaman seç:** Kendi sunucunu kontrol etmek isteyen, maliyeti düşük tutmak isteyen her proje için.
 
-Neden: Next.js'in yapımcısı olan şirketin hosting platformu. Sıfır konfigürasyon — repo'yu bağla, deploy et, bitti. Otomatik preview deployment'lar (her PR için ayrı URL), edge network ile global düşük latency, dahili analytics ve Web Vitals ölçümü, ücretsiz SSL.
+Neden: Açık kaynak, self-hosted PaaS platformu. Kendi VPS'ine (Hetzner, DigitalOcean, Contabo vb.) kurulur — Docker tabanlı deployment, otomatik SSL (Let's Encrypt), GitHub entegrasyonu ile otomatik deploy, preview deployment desteği, dahili monitoring ve log yönetimi. Platform ücretsiz, sadece VPS maliyeti var.
 
-Ücretsiz katman sınırları: Aylık 100 GB bandwidth, 100 saat build süresi, serverless function'lar 10 saniye timeout. Çoğu erken SaaS için fazlasıyla yeterli.
+Maliyet: Hetzner'de aylık ~€4-5'lık bir VPS ile başlanabilir. Çoğu erken SaaS için fazlasıyla yeterli. Traffic artınca VPS'i büyüt — platform maliyeti hâlâ $0.
 
-Ne zaman yetmez: Uzun süren background job'lar (10 saniyeyi aşan işlemler), WebSocket gerektiren uygulamalar (Vercel WebSocket desteği sınırlı), kendi veritabanını aynı platformda isteyenler.
+Ne zaman yetmez: Sunucu yönetiminden tamamen kaçınmak isteyenler (managed platform tercih edenler), global edge network gerektiren uygulamalar.
 
 ### Railway
 
@@ -50,7 +50,7 @@ Neden: PostgreSQL, Redis, MySQL gibi servisleri aynı platformda barındırır. 
 
 Neden: Container'ları birden fazla bölgede çalıştırır. Persistent volume (kalıcı disk) desteği. WebSocket ve long-polling doğal desteklenir.
 
-Ek yük: Dockerfile yazmak ve yönetmek gerekir. Vercel veya Railway kadar "sıfır konfigürasyon" değil.
+Ek yük: Dockerfile yazmak ve yönetmek gerekir. Dokploy veya Railway kadar kolay dashboard yönetimi yok.
 
 ---
 
@@ -172,7 +172,7 @@ Sentry'nin sağladıkları:
 
 Kullanıcıların uygulamayı nasıl kullandığını anlamak için.
 
-Başlangıç için: Vercel Analytics (ücretsiz, dahili) veya Plausible (gizlilik odaklı, basit). Google Analytics da seçenek ama GDPR/KVKK açısından cookie consent gerektirir.
+Başlangıç için: Plausible (gizlilik odaklı, basit) veya PostHog (zaten analytics skill'inde kurulu). Google Analytics da seçenek ama GDPR/KVKK açısından cookie consent gerektirir.
 
 İzlenmesi gereken temel metrikler:
 - Aylık ziyaretçi sayısı
@@ -183,7 +183,7 @@ Başlangıç için: Vercel Analytics (ücretsiz, dahili) veya Plausible (gizlili
 
 ### Log Yönetimi
 
-Vercel, Railway ve Fly.io dahili log görüntüleme sunar. Başlangıç için yeterli. Büyüdükçe Axiom, Datadog veya LogTail gibi bir log toplama servisine geç.
+Dokploy, Railway ve Fly.io dahili log görüntüleme sunar. Başlangıç için yeterli. Büyüdükçe Axiom, Datadog veya LogTail gibi bir log toplama servisine geç.
 
 ---
 
@@ -191,9 +191,9 @@ Vercel, Railway ve Fly.io dahili log görüntüleme sunar. Başlangıç için ye
 
 ### Basit Yaklaşım (Önerilen Başlangıç)
 
-Vercel veya Railway GitHub repo'na bağlandığında zaten CI/CD yapar:
+Dokploy veya Railway GitHub repo'na bağlandığında zaten CI/CD yapar:
 - `main` branch'e push → otomatik production deploy
-- PR açıldığında → otomatik preview deploy (Vercel)
+- PR açıldığında → otomatik preview deploy (Dokploy)
 
 Bu çoğu erken SaaS için yeterlidir.
 
@@ -223,7 +223,7 @@ Git zaten tüm kodu versiyonlar. GitHub/GitLab repo'su silinmedikçe kod güvend
 
 ### Ortam Değişkenleri Yedekleme
 
-Platform (Vercel, Railway) çökerse ortam değişkenlerin kaybolabilir. Güvenli bir yerde (1Password, Bitwarden gibi şifre yöneticisi) bir kopyasını tut.
+Platform (Dokploy, Railway) çökerse veya VPS'in arızalanırsa ortam değişkenlerin kaybolabilir. Güvenli bir yerde (1Password, Bitwarden gibi şifre yöneticisi) bir kopyasını tut.
 
 ---
 
@@ -231,10 +231,11 @@ Platform (Vercel, Railway) çökerse ortam değişkenlerin kaybolabilir. Güvenl
 
 Erken aşamada ölçeklendirme düşünme — premature optimization'dan kaçın. Ama şu noktaları aklında tut:
 
-**Vercel'de büyüdükçe:**
-- Function timeout'u (hobby: 10s, pro: 60s) darboğaz olabilir → ağır işleri background job'lara taşı (Inngest, Trigger.dev)
-- Bandwidth limiti aşılırsa → Pro plana geç
-- Edge function'lar için global dağıtım otomatik
+**Dokploy'da büyüdükçe:**
+- VPS kaynakları (CPU, RAM) yetmezse → daha güçlü VPS'e geç veya birden fazla sunucu kur
+- Ağır işleri background job'lara taşı (Inngest, Trigger.dev, BullMQ)
+- Yüksek traffic için Cloudflare CDN ekle (global düşük latency)
+- Dokploy birden fazla sunucuya deployment destekler — horizontal scaling mümkün
 
 **Veritabanında büyüdükçe:**
 - Connection pooling: serverless'ta bağlantı sayısı çabuk tükenir → pooler kullan
@@ -299,10 +300,10 @@ Erken aşamada ölçeklendirme düşünme — premature optimization'dan kaçın
 
 ## Gotchas
 
-- **İlk deploy'da build hatası.** Local'de çalışan kod Vercel'de çökebilir — server component'lerdeki client-only kodlar, eksik ortam değişkenleri veya case-sensitive dosya adları (Linux case-sensitive, macOS değil) en sık nedenler.
-- **Vercel build cache.** Bazen eski build cache'i sorunlara neden olur. Dashboard'da "Redeploy" → "Clear Build Cache" ile temizle.
-- **Preview vs. production ortam değişkenleri.** Vercel'de her ortam (Production, Preview, Development) ayrı değişken seti alabilir. Preview deploy'larda test anahtarlarını, production'da live anahtarlarını kullan.
+- **İlk deploy'da build hatası.** Local'de çalışan kod Dokploy'da çökebilir — server component'lerdeki client-only kodlar, eksik ortam değişkenleri veya case-sensitive dosya adları (Linux case-sensitive, macOS değil) en sık nedenler.
+- **Docker build cache.** Bazen eski build cache'i sorunlara neden olur. Dokploy dashboard'ında yeniden deploy ederken cache temizlemeyi dene.
+- **Preview vs. production ortam değişkenleri.** Dokploy'da her uygulama için ayrı ortam değişkenleri tanımlanabilir. Preview deploy'larda test anahtarlarını, production'da live anahtarlarını kullan.
 - **DNS propagation sabır gerektirir.** 24-48 saat sürebilir. "Deploy ettim ama site açılmıyor" panikleme — DNS yayılımını bekle.
 - **Stripe live modda ilk test.** Live modda gerçek kart ile küçük bir test ödemesi yap, webhook'un çalıştığını doğrula, sonra Stripe dashboard'dan iade et. "Production'da çalışıyor varsayıyorum" deme — doğrula.
 - **Gece launch yapma.** Sorun çıkınca müdahale edebileceğin saatlerde launch et. İdeal: hafta içi sabah.
-- **Rollback planı.** Bir şeyler ters giderse önceki deploy'a geri dönebilmelisin. Vercel'de bu tek tıkla yapılır (önceki deployment'a instant rollback). Platform seçerken bu yeteneği kontrol et.
+- **Rollback planı.** Bir şeyler ters giderse önceki deploy'a geri dönebilmelisin. Dokploy'da önceki Docker image'a geri dönülebilir. Git'te revert commit yapıp yeniden deploy da alternatif. Platform seçerken bu yeteneği kontrol et.

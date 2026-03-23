@@ -87,7 +87,7 @@ AB'deki kullanıcılara hizmet veriyorsan GDPR de geçerli. KVKK'ya ek olarak:
 - Stripe / Lemon Squeezy (ödeme işleme)
 - Resend (e-posta gönderimi)
 - PostHog (analytics)
-- Vercel (hosting)
+- Dokploy / VPS sağlayıcısı (hosting)
 - Google (OAuth — kullanılıyorsa)
 
 **5. Veri saklama süresi:**
@@ -221,6 +221,6 @@ Tüketici koruma mevzuatı gereği dijital hizmetlerde 14 gün cayma hakkı olab
 - **"Herkes kullanıyor, sorun olmaz" yanılgısı.** KVKK cezaları bireysel veri sorumlularına da uygulanır. Solo founder muaf değildir.
 - **Çerez onayı almadan analytics başlatma.** PostHog veya GA'yı kullanıcı onayı olmadan başlatmak KVKK/GDPR ihlali.
 - **Gizlilik politikasını güncel tutma.** Yeni bir üçüncü taraf servis ekledikçe (analytics, e-posta, CDN) gizlilik politikasını güncelle.
-- **Veri lokasyonu önemli.** KVKK yurt dışına veri aktarımında açık rıza veya yeterli koruma gerektirir. Supabase, Vercel, Stripe gibi servislerin veri merkezlerini gizlilik politikasında belirt.
+- **Veri lokasyonu önemli.** KVKK yurt dışına veri aktarımında açık rıza veya yeterli koruma gerektirir. Supabase, VPS sağlayıcısı (Hetzner, DigitalOcean vb.), Stripe gibi servislerin veri merkezlerini gizlilik politikasında belirt. Dokploy self-hosted olduğu için VPS'in lokasyonunu sen seçersin — Avrupa bölgesi KVKK/GDPR açısından avantajlı.
 - **Fatura verileri silinemez.** Vergi mevzuatı gereği fatura ve ödeme kayıtları 10 yıl saklanmalı. Hesap silinse bile bu veriler anonimleştirilerek tutulmalı.
 - **Hukukçuya danış ama bekleme.** AI ile taslak oluştur, yayınla, ardından hukukçuya onaylat. Hukukçu beklentisi launch'ı aylarca erteleyebilir.

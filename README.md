@@ -68,7 +68,7 @@ Her biri bağımsız olarak da kullanılabilir:
 | `saas-api-security` | 8 | Rate limiting, plan bazlı erişim, input validation, CORS |
 | `saas-testing` | 9 | Vitest, Playwright E2E, webhook testi, CI entegrasyonu |
 | `saas-analytics` | 10 | PostHog, event tracking, feature flags, session replay |
-| `saas-deployment` | 11 | Vercel / Railway / Fly.io, domain, SSL, CI/CD, izleme |
+| `saas-deployment` | 11 | Dokploy / Railway / Fly.io, domain, SSL, CI/CD, izleme |
 
 ### Faz Akışı
 
@@ -99,7 +99,7 @@ Faz 11  Deployment               ─── saas-deployment
 | Ödeme | Stripe veya Lemon Squeezy | Bölgeye ve ihtiyaca göre seçim |
 | E-posta | Resend + React Email | Modern API, tip güvenli şablonlar |
 | Analytics | PostHog | Ürün analizi, feature flags, session replay |
-| Hosting | Vercel | Sıfır konfigürasyon, otomatik deploy |
+| Hosting | Dokploy (self-hosted) | Ücretsiz, Docker tabanlı, kendi sunucunda deploy |
 
 Her teknoloji keşif görüşmesinde kullanıcının ihtiyaçlarına göre değiştirilebilir.
 

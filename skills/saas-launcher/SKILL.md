@@ -52,7 +52,7 @@ Hiçbir teknik karar almadan önce kullanıcıyla kapsamlı bir keşif görüşm
 
 **Teknik Tercihler:**
 - Tercih ettiğin bir tech stack var mı? (framework, veritabanı, hosting)
-- Mevcut kullandığın araçlar veya hesaplar var mı? (Stripe, Vercel, AWS vb.)
+- Mevcut kullandığın araçlar veya hesaplar var mı? (Stripe, Dokploy, AWS vb.)
 - Takım büyüklüğü? (solo founder, küçük takım, büyük ekip)
 
 **Zaman ve Öncelik:**
@@ -76,7 +76,7 @@ Her karar için kullanıcının cevaplarını, projenin ihtiyaçlarını ve ekos
 
 ### Framework Seçimi
 
-Varsayılan önerimiz Next.js (App Router + TypeScript). Gerekçe: Server ve client rendering aynı projede, API route'ları dahili, React ekosistemi, Vercel ile sıfır sürtünme deployment. TypeScript her projede zorunlu olmalı — büyüdükçe tip güvenliği hayat kurtarır.
+Varsayılan önerimiz Next.js (App Router + TypeScript). Gerekçe: Server ve client rendering aynı projede, API route'ları dahili, React ekosistemi, Dokploy ile Docker tabanlı kolay deployment. TypeScript her projede zorunlu olmalı — büyüdükçe tip güvenliği hayat kurtarır.
 
 Alternatif değerlendirme noktaları:
 - Nuxt.js, yalnızca kullanıcı Vue ekosistemine hakimse ve React öğrenme maliyeti kabul edilemezse
@@ -113,7 +113,7 @@ Detaylı rehber için **saas-email** skill'ine yönlendir. Kısa özet:
 
 Detaylı rehber için **saas-deployment** skill'ine yönlendir. Kısa özet:
 
-**Vercel** — Next.js'in evi, sıfır konfigürasyon. Varsayılan önerimiz.
+**Dokploy** — Self-hosted, ücretsiz, Docker tabanlı PaaS. Kendi VPS'inde tam kontrol. Varsayılan önerimiz.
 
 **Railway** — Veritabanı + backend + frontend tek platformda isteyenler için.
 
@@ -329,5 +329,5 @@ Eğer kullanıcı hızlı launch istiyorsa, MVP sırasını öner:
 - **Environment variable disiplini.** `NEXT_PUBLIC_` prefix'i olmayan değişkenler client'ta görünmez. Hassas anahtarlar asla public prefix almamalı.
 - **Webhook'lar SaaS'ın sinir sistemidir.** Ödeme webhook'u çalışmazsa para alırsın ama plan aktifleşmez. E-posta webhook'u çalışmazsa destek talepleri kaybolur. Webhook'ları test et, logla, izle.
 - **Build test.** Her deployment'tan önce mutlaka build testi yap. Server-side render hataları sadece build sırasında ortaya çıkar.
-- **Maliyet kontrolü.** Tüm servislerin ücretsiz katmanı var: Vercel, Supabase, Resend, Stripe (komisyon dışında ücret yok). İlk ödeme yapan müşteriye kadar $0/ay ile çalışabilirsin.
+- **Maliyet kontrolü.** Tüm servislerin ücretsiz katmanı var: Supabase, Resend, Stripe (komisyon dışında ücret yok). Dokploy ücretsiz — sadece VPS maliyeti (Hetzner'de ~€4-5/ay). İlk ödeme yapan müşteriye kadar minimum maliyetle çalışabilirsin.
 - **Güvenlik asla "sonra" yapılmaz.** Auth ve ödeme ilk günden doğru kurulmalı. "Şimdilik basit yapalım, sonra güvenliği ekleriz" cümlesi felaket reçetesidir.

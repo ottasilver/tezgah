@@ -38,4 +38,4 @@ Uzman skill'ler (her biri bağımsız da kullanılabilir):
 
 ## Varsayılan Tech Stack
 
-Next.js (App Router) + TypeScript + Tailwind CSS + shadcn/ui + Supabase + Stripe + Resend + PostHog + Vercel
+Next.js (App Router) + TypeScript + Tailwind CSS + shadcn/ui + Supabase + Stripe + Resend + PostHog + Dokploy

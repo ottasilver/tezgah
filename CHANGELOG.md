@@ -19,7 +19,7 @@ ve proje [Semantic Versioning](https://semver.org/lang/tr/) kullanır.
 - **saas-api-security** — API güvenliği: rate limiting, plan bazlı erişim, input validation
 - **saas-testing** — Test stratejisi: Vitest, Playwright E2E, webhook testi, CI entegrasyonu
 - **saas-analytics** — Ürün analizi: PostHog, event tracking, feature flags, session replay
-- **saas-deployment** — Deployment: Vercel/Railway/Fly.io, domain, SSL, CI/CD, izleme
+- **saas-deployment** — Deployment: Dokploy/Railway/Fly.io, domain, SSL, CI/CD, izleme
 
 **CLI aracı:**
 - `tezgah init` — tüm skill'leri kur

@@ -145,7 +145,7 @@ Supabase CLI (`npx supabase`) ile migration yönetimi:
 
 ### Serverless Ortamda Neden Kritik
 
-Vercel gibi serverless platformlarda her function invocation yeni bir veritabanı bağlantısı açar. Supabase'in ücretsiz planında bağlantı limiti düşüktür — limit aşılırsa "too many connections" hatası alırsın.
+Dokploy gibi container tabanlı platformlarda uygulama tek bir process olarak çalışsa da, Next.js'in hot reload'u veya yüksek eşzamanlı istek sayısı bağlantı havuzunu zorlayabilir. Supabase'in ücretsiz planında bağlantı limiti düşüktür — limit aşılırsa "too many connections" hatası alırsın.
 
 ### Çözüm: Supavisor (Supabase Pooler)
 
